@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OC Stream Clipper</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;600;700&display=swap"
+        rel="stylesheet">
+</head>
+
+<body>
+    <div class="app-container">
+        <header class="app-header">
+            <div class="logo">
+                <span class="logo-text">OC Stream Clipper</span>
+            </div>
+            <div class="header-controls">
+                <input type="text" id="rtmp-url" placeholder="rtmp://servidor.com/app/stream_key" value="">
+                <button id="btn-connect" class="btn-primary">Conectar</button>
+            </div>
+        </header>
+
+        <main class="main-content">
+            <div class="video-section">
+                <div class="video-container" id="video-wrapper">
+                    <video id="main-video" controls muted></video>
+                    <div id="status-overlay" class="overlay hidden">
+                        <div class="spinner"></div>
+                        <p>Conectando con el flujo...</p>
+                    </div>
+                </div>
+
+                <div class="clipper-controls">
+                    <div class="timeline-container">
+                        <div class="timeline-header">
+                            <div class="time-block" style="display: flex; align-items: center; gap: 12px;">
+                                <span class="time-marker" id="current-time">00:00:00</span>
+                                <button id="btn-live" class="badge out hidden"
+                                    style="cursor:pointer; border:none; padding: 4px 10px;">🔴 Volver al
+                                    directo</button>
+                            </div>
+                            <div class="marker-info">
+                                <span class="badge in">IN: <span id="in-point">--:--:--</span></span>
+                                <span class="badge out">OUT: <span id="out-point">--:--:--</span></span>
+                                <span class="badge duration">DUR: <span id="dur-point">0s</span></span>
+                            </div>
+                        </div>
+                        <div id="timeline-track" class="timeline-track">
+                            <div id="clip-range" class="clip-range"></div>
+                            <div id="playhead" class="playhead"></div>
+                        </div>
+                    </div>
+
+                    <div class="action-bar">
+                        <div class="basic-actions">
+                            <button id="btn-mark-in" class="btn-secondary">Marcar Entrada ( I )</button>
+                            <button id="btn-mark-out" class="btn-secondary">Marcar Salida ( O )</button>
+                        </div>
+                        <button id="btn-export" class="btn-accent" disabled>Exportar Clip</button>
+                    </div>
+                </div>
+            </div>
+
+            <aside class="sidebar">
+                <h3>Recientes</h3>
+                <div id="export-history" class="history-list">
+                    <p class="empty-msg">No hay clips exportados aún</p>
+                </div>
+            </aside>
+        </main>
+
+        <footer class="app-footer">
+            <div class="status-bar">
+                <span class="status-dot inactive"></span>
+                <span id="status-text">Listo para conectar</span>
+            </div>
+        </footer>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/hls.js@1"></script>
+    <script src="renderer.js"></script>
+</body>
+
+</html>
